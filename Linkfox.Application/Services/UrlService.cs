@@ -72,8 +72,18 @@ namespace LinkFox.Application.Services
             return Result<CreateShortUrlResponse>.Ok(new CreateShortUrlResponse(saved.Id, saved.ShortCode, shortUrl, saved.LongUrl));
         }
 
+        /// <summary>
+        /// Get LongUrl by shortcode and record click count
+        /// </summary>
+        /// <param name="shortCode"></param>
+        /// <param name="ipAddress"></param>
+        /// <param name="userAgent"></param>
+        /// <param name="referrer"></param>
+        /// <param name="acceptLanguage"></param>
+        /// <returns></returns>
         public async Task<string?> GetLongUrlAndRecordClickAsync(string shortCode, string ipAddress, string? userAgent, string? referrer, string? acceptLanguage)
         {
+
             var url = await _repo.GetByShortCodeAsync(shortCode);
             if (url == null) return null;
 
@@ -105,6 +115,12 @@ namespace LinkFox.Application.Services
             return url.LongUrl;
         }
 
+        /// <summary>
+        /// Get Paged Urls List
+        /// </summary>
+        /// <param name="request"></param>
+        /// <param name="origin"></param>
+        /// <returns></returns>
         public async Task<Result<PagedList<UrlListResponse>>> GetUrlsAsync(UrlListRequest request, string origin)
         {
             _logger.LogInformation("Fetching paged URL list: Page {Page}, Size {PageSize}, Search {Search}",
@@ -132,6 +148,41 @@ namespace LinkFox.Application.Services
             };
 
             return Result<PagedList<UrlListResponse>>.Ok(pagedList);
+        }
+
+        /// <summary>
+        /// Get analytics for a short URL by shortcode.
+        /// </summary>
+        /// <param name="shortCode"></param>
+        /// <returns></returns>
+        public async Task<Result<UrlAnalyticsResponse>> GetAnalyticsByShortCodeAsync(string shortCode, string origin)
+        {
+            var url = await _repo.GetByShortCodeAsync(shortCode);
+            if (url == null)
+                return Result<UrlAnalyticsResponse>.Fail("NotFound", "Short code not found.");
+
+            var clicks = url.Clicks
+                .OrderByDescending(c => c.ClickedAt)
+                .Select(c => new ClickDetail
+                {
+                    ClickedAt = c.ClickedAt,
+                    IpAddress = c.IpAddress,
+                    UserAgent = c.UserAgent ?? string.Empty
+                })
+                .ToList();
+
+            var response = new UrlAnalyticsResponse
+            {
+                ShortCode = url.ShortCode,
+                ShortUrl = origin.TrimEnd('/') + "/r/" + url.ShortCode,
+                LongUrl = url.LongUrl,
+                CreatedAt = url.CreatedAt,
+                ClickCount = url.ClickCount,
+                LastAccessed = clicks.FirstOrDefault()?.ClickedAt,
+                Clicks = clicks
+            };
+
+            return Result<UrlAnalyticsResponse>.Ok(response);
         }
     }
 }

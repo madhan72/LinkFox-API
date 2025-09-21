@@ -61,6 +61,16 @@ builder.Services.AddCors(options =>
 		});
 });
 
+//Redis Cache
+builder.Services.AddStackExchangeRedisCache(options =>
+{
+    options.Configuration = builder.Configuration.GetConnectionString("Redis");
+    options.InstanceName = "LinkFox_";
+});
+
+// Register CacheService
+builder.Services.AddScoped<ICacheService, CacheService>();
+
 var app = builder.Build();
 
 //Custom middleware

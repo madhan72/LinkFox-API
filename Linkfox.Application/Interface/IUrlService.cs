@@ -15,5 +15,6 @@ namespace LinkFox.Application.Interface
         Task<Result<CreateShortUrlResponse>> CreateShortUrlAsync(CreateShortUrlRequest request, string origin);
         Task<string?> GetLongUrlAndRecordClickAsync(string shortCode, string ipAddress, string? userAgent, string? referrer, string? acceptLanguage);
         Task<Result<PagedList<UrlListResponse>>> GetUrlsAsync(UrlListRequest request, string origin);
+        Task<Result<UrlAnalyticsResponse>> GetAnalyticsByShortCodeAsync(string shortCode, string origin);
     }
 }

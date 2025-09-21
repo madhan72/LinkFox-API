@@ -82,5 +82,21 @@ namespace LinkFox.Api.Controllers
             return Ok(result);
         }
 
+
+        /// <summary>
+        /// Get analytics for a short URL by shortcode.
+        /// </summary>
+        [HttpGet("analytics")]
+        public async Task<IActionResult> GetAnalytics([FromQuery] string shortCode)
+        {
+            var origin = $"{Request.Scheme}://{Request.Host}";
+            var result = await _service.GetAnalyticsByShortCodeAsync(shortCode, origin);
+
+            if (!result.Success || result.Data == null)
+                return NotFound(result.ErrorMessage);
+
+            return Ok(result);
+        }
+
     }
 }

@@ -11,13 +11,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinkFox.Infrastructure", "L
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinkFox.Api", "LinkFox.Api\LinkFox.Api.csproj", "{3EAEBFA7-ECC4-452C-915C-3AF9C06CDBBC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinkFox.UnitTests", "LinkFox.UnitTests\LinkFox.UnitTests.csproj", "{3A60A37A-94D0-41B0-836C-2EA98454272E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{624BCDD8-FA70-46E7-B509-43EDAEFC65E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -36,5 +35,12 @@ Global
 		{3EAEBFA7-ECC4-452C-915C-3AF9C06CDBBC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3EAEBFA7-ECC4-452C-915C-3AF9C06CDBBC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3EAEBFA7-ECC4-452C-915C-3AF9C06CDBBC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3A60A37A-94D0-41B0-836C-2EA98454272E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3A60A37A-94D0-41B0-836C-2EA98454272E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3A60A37A-94D0-41B0-836C-2EA98454272E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3A60A37A-94D0-41B0-836C-2EA98454272E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
 	EndGlobalSection
 EndGlobal
