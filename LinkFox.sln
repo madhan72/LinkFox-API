@@ -1,0 +1,40 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Linkfox.domain", "Linkfox.Domain\Linkfox.domain.csproj", "{624BCDD8-FA70-46E7-B509-43EDAEFC65E5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinkFox.Application", "LinkFox.Application\LinkFox.Application.csproj", "{887BCCD8-7828-40CF-AC9C-EE668B13EE02}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinkFox.Infrastructure", "LinkFox.Infrastructure\LinkFox.Infrastructure.csproj", "{3E37EB81-EBF9-4C39-BA95-41D3795FCEFB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinkFox.Api", "LinkFox.Api\LinkFox.Api.csproj", "{3EAEBFA7-ECC4-452C-915C-3AF9C06CDBBC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{624BCDD8-FA70-46E7-B509-43EDAEFC65E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{624BCDD8-FA70-46E7-B509-43EDAEFC65E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{624BCDD8-FA70-46E7-B509-43EDAEFC65E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{624BCDD8-FA70-46E7-B509-43EDAEFC65E5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{887BCCD8-7828-40CF-AC9C-EE668B13EE02}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{887BCCD8-7828-40CF-AC9C-EE668B13EE02}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{887BCCD8-7828-40CF-AC9C-EE668B13EE02}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{887BCCD8-7828-40CF-AC9C-EE668B13EE02}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3E37EB81-EBF9-4C39-BA95-41D3795FCEFB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3E37EB81-EBF9-4C39-BA95-41D3795FCEFB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3E37EB81-EBF9-4C39-BA95-41D3795FCEFB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3E37EB81-EBF9-4C39-BA95-41D3795FCEFB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3EAEBFA7-ECC4-452C-915C-3AF9C06CDBBC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3EAEBFA7-ECC4-452C-915C-3AF9C06CDBBC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3EAEBFA7-ECC4-452C-915C-3AF9C06CDBBC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3EAEBFA7-ECC4-452C-915C-3AF9C06CDBBC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
