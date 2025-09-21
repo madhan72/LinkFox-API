@@ -28,7 +28,6 @@ namespace LinkFox.Application.Services
         /// Creates a short URL. If Alias provided, checks uniqueness.
         /// If not, we persist to get numeric Id and produce base62 ShortCode from Id.
         /// </summary>
-        /// 
         public async Task<Result<CreateShortUrlResponse>> CreateShortUrlAsync(CreateShortUrlRequest request, string origin)
         {
             if (string.IsNullOrWhiteSpace(request.LongUrl))
@@ -78,6 +77,8 @@ namespace LinkFox.Application.Services
             var url = await _repo.GetByShortCodeAsync(shortCode);
             if (url == null) return null;
 
+            var deviceDetector = DeviceDetector.GetDeviceCategory(userAgent);
+
             // Create click record
             var click = new Click
             {
@@ -86,6 +87,7 @@ namespace LinkFox.Application.Services
                 UserAgent = userAgent,
                 Referrer = referrer,
                 AcceptLanguage = acceptLanguage,
+                DeviceCategory = deviceDetector,
                 ClickedAt = DateTime.UtcNow // application-level timestamp; DB also has default
             };
 

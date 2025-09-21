@@ -29,7 +29,7 @@ namespace LinkFox.Api.Controllers
             try
             {
                 // Build origin to create full short Url
-                var origin = $"{Request.Scheme}: // {Request.Host.Value}";
+                var origin = $"{Request.Scheme}://{Request.Host.Value}";
 
                 var result = await _service.CreateShortUrlAsync(request, origin);
 
@@ -54,8 +54,9 @@ namespace LinkFox.Api.Controllers
                 var ip = HttpContext.Connection.RemoteIpAddress?.ToString();
                 var userAgent = Request.Headers["User-Agent"].ToString();
                 var referer = Request.Headers["Referer"].ToString() ;
+                var acceptLanguage = Request.Headers["Accept-Language"].FirstOrDefault();
 
-                var longUrl = await _service.GetLongUrlAndRecordClickAsync(shortCode, ip, userAgent, referer,"");
+                var longUrl = await _service.GetLongUrlAndRecordClickAsync(shortCode, ip, userAgent, referer, acceptLanguage);
 
                 if (longUrl == null) return NotFound();
                 
