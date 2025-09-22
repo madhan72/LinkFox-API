@@ -2,6 +2,7 @@
 using LinkFox.Application.DTOs;
 using LinkFox.Application.Interface;
 using LinkFox.Application.Utils;
+using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Logging;
 using System.Data.SqlTypes;
 
@@ -16,12 +17,14 @@ namespace LinkFox.Application.Services
         private readonly IUrlRepository _repo;
         private readonly ILogger<UrlService> _logger;
         private readonly string _defaultHost;
+        private readonly IDistributedCache _cache;
 
-        public UrlService(IUrlRepository repo,ILogger<UrlService> logger)
+        public UrlService(IUrlRepository repo,ILogger<UrlService> logger, IDistributedCache cache)
         {
             _repo = repo;
             _logger = logger;
-            _defaultHost = ""; 
+            _defaultHost = "";
+            _cache = cache;
         }
 
         /// <summary>
@@ -83,6 +86,16 @@ namespace LinkFox.Application.Services
         /// <returns></returns>
         public async Task<string?> GetLongUrlAndRecordClickAsync(string shortCode, string ipAddress, string? userAgent, string? referrer, string? acceptLanguage)
         {
+            // Define a cache key for this shortCode
+            var cacheKey = $"ShortUrl:{shortCode}";
+
+            // Try to get the LongUrl from Redis cache
+            var cachedLongUrl = await _cache.GetStringAsync(cacheKey);
+            if (!string.IsNullOrEmpty(cachedLongUrl))
+            {
+                _logger.LogInformation("Cache hit for ShortCode {ShortCode}", shortCode);
+                return cachedLongUrl; // Return cached result immediately
+            }
 
             var url = await _repo.GetByShortCodeAsync(shortCode);
             if (url == null) return null;
@@ -109,6 +122,15 @@ namespace LinkFox.Application.Services
 
             // Save both click and url update
             await _repo.SaveChangesAsync();
+
+            // Store the LongUrl in Redis with an expiration (e.g., 1 hour)
+            await _cache.SetStringAsync(
+                cacheKey,
+                url.LongUrl,
+                new DistributedCacheEntryOptions
+                {
+                    AbsoluteExpirationRelativeToNow = TimeSpan.FromHours(1)
+                });
 
             _logger.LogInformation("Recorded click for ShortCode {ShortCode} from IP {IP}", shortCode, ipAddress);
 
