@@ -10,8 +10,13 @@ Supports URL shortening, redirect with click tracking, and analytics.
 Before running this project, ensure you have the following installed:
 
   .NET 8 SDK
+  
   SQL Server
+
+  Redis
+  
   Git
+  
 
 ⚙️ Project Setup
   1. Clone the Repository
