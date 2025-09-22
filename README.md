@@ -20,15 +20,16 @@ Before running this project, ensure you have the following installed:
 
 ⚙️ Project Setup
   1. Clone the Repository
-  git clone https://github.com/yourusername/linkfox.git
-  cd linkfox
+  git clone https://github.com/madhan72/LinkFox-API.git
+  cd linkfox-api
   
   2. Configure Database Connection
   
   Update appsettings.json in WebApi project:
   
   "ConnectionStrings": {
-    "DefaultConnection": "Server=localhost;Database=LinkFoxDb;User Id=sa;Password=YourPassword;"
+    "DefaultConnection": "Server=localhost;Database=LinkFoxDb;User Id=sa;Password=YourPassword;",
+    "Redis": "localhost:6379"
   } 
   
   3. Apply Database Migrations
@@ -37,6 +38,8 @@ Before running this project, ensure you have the following installed:
   
   4. Run the Application
   dotnet run --project WebApi
+
+  Ensure Redis server is running
 
 
 The API will be available at:
